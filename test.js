@@ -24,6 +24,13 @@ map.addControl(new mapboxgl.NavigationControl());
 // Enables the user to toggle both full screen and normal display
 map.addControl(new mapboxgl.FullscreenControl());
 
+//$.getJSON("CESR_newer.json", function(json) {
+//    var testing = json
+//    console.log(json); // this will show the info it in firebug console
+//});
+
+//console.log("hey");
+//onsole.log(json);
 var mydata = JSON.parse(data);
 var places = mydata[0];
 
@@ -254,6 +261,7 @@ function openNav() {
     document.getElementById("main").style.marginLeft = "30%";
     document.getElementById('filter-container').style.marginLeft = "31%";
 }
+
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
