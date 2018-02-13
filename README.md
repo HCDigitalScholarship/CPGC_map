@@ -1,4 +1,4 @@
- C# CPGC_map :earth_americas:
+# CPGC_map :earth_americas:
 An interactive map of previous CPGC funded internships  
 Currently hosted here: http://ds-web.haverford.edu/cpgc/map.html#
 
