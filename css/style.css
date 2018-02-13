@@ -95,6 +95,9 @@ h1 {
   font-size: 18px;
 }
 
+
+
+
 .listings .item .title small { font-weight: 400; }
 
 .listings .item.active .title,
@@ -174,12 +177,22 @@ h1 {
     color: #818181;
     display: block;
     transition: 0.3s;
+
 }
+/* definitely a better way to do this but ¯\_(シ)_/¯ */
 
 .sidenav a:hover, .offcanvas a:focus{
     color: #CE464D;
 }
 
+.descrip a {
+
+ display: inline;
+}
+.descrip a:nth-of-type(2) {
+   padding: 0px;
+ display: inline;
+}
 
 
 .sidenav .closebtn {
@@ -197,7 +210,7 @@ h1 {
 
 #resultnumber {
   border-bottom: 1px solid #eee;
-  padding: 0px 10px 10px 20px;
+  padding: 3px 10px 10px 20px;
   text-decoration: none;
 }
 

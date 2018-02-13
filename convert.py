@@ -5,11 +5,12 @@ import sys, getopt
 import csv
 import json
 import spreadsheet
-
+import
 
 
 
 #Get Command Line Arguments
+# use dump pretty if you want to debug the json being created .
 def main(argv):
     input_file = ''
     output_file = ''
@@ -62,17 +63,20 @@ def read_csv(file, json_file, format):
     with open(file) as csvfile:
         reader = csv.DictReader(csvfile)
         title = reader.fieldnames # should remove lat and long from this because they have no use as properties
-    #    title.remove("Latitude")
-    #    title.remove("Longitude")
         for row in reader:
             #print row
             lat = row["Latitude"]
             lon = row["Longitude"]
-            csv_rows.extend([{"type": "Feature", "geometry": { "type": "Point", "coordinates": [ lon,lat ] },"properties":{title[i]:row[title[i]] for i in range(len(title))}}])
+            if lat =="" or lon == "": # no coordinates ... dont add to map!
+                continue
+            else:
+                #''.join(title[i].split()) is to ensure that no key has any spaces in it.
+                csv_rows.extend([{"type": "Feature", "geometry": { "type": "Point", "coordinates": [ lon,lat ] },"properties":{''.join(title[i].split()):row[title[i]] for i in range(len(title))}}])
 #        print csv_rows[0]
+
         write_json(csv_rows, json_file, format)
 
-#Read CSV File
+#Reading from googlesheet file
 def read_sheet(json_file, format):
     #Get spreadsheet!
     input_data = spreadsheet.pullsheet()
@@ -85,17 +89,20 @@ def read_sheet(json_file, format):
         #print row
         lat = row["Latitude"]
         lon = row["Longitude"]
-        sheet_rows.extend([{"type": "Feature", "geometry": { "type": "Point", "coordinates": [ lon,lat ] },"properties":{fieldnames[i]:row[fieldnames[i]] for i in range(len(fieldnames))}}])
+        if lat =="" or lon == "": # no coordinates... dont add to map!
+            continue
+        else:
+            #''.join(fieldnames[i].split()) is to ensure that no key has any spaces in it.
+            sheet_rows.extend([{"type": "Feature", "geometry": { "type": "Point", "coordinates": [ lon,lat ] },"properties":{''.join(fieldnames[i].split()):row[fieldnames[i]] for i in range(len(fieldnames))}}])
 #    print "first Feature obj",sheet_rows[0]
 #    print json.dumps(sheet_rows)
 #    write_json(sheet_rows, json_file, format)
-   # print("got here")
+#    print("got here")
 
     with open(json_file, "w") as f:
         f.write("data ='[{\"type\": \"FeatureCollection\",\"features\":")
         f.write(json.dumps(sheet_rows))
         f.write("}]';")
-
 
 
 #Convert data into json and write it

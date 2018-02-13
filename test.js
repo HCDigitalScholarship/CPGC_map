@@ -81,16 +81,22 @@ $('.menu-ui a').on('click', function() {
   var filter = $(this).data('filter');
   console.log('current filter: ',filter)
   closetabs();
-
+  var old_filters = map.getFilter('locations');
+  console.log('old_filter: ', old_filters)
   $(this).addClass('active').siblings().removeClass('active');
-  map.setFilter('locations', ['==', filter, 'TRUE']);
+  map.setFilter('locations', ["all",['==', filter, 'TRUE']]);
   if(filter == 'all'){
-    map.setFilter('locations');
+    map.setFilter('locations',["all"]);
+    $(this).addClass('active').siblings().removeClass('active');
     //document.getElementById('listings').innerHTML = '';
     buildLocationList(places.features,0);
   }
   else {
+
+    //var new_filter =
+  //  map.setFilter('locations',new_filter)
     // Finds the points to populate the sidebar //
+    // var new_locs = map.querySourceFeatures('places',  { filter:new_filter} );
     var new_locs = [];
     var x = places.features;
     var hi = x.forEach(function(elem) {
@@ -98,6 +104,13 @@ $('.menu-ui a').on('click', function() {
       new_locs.push(elem)
       }
     });
+
+    // NOTE: THE BELOW LINE WORKS !
+    // map.setFilter('locations', ["all",['==', "Spring_Availability", 'TRUE'],['==', "Areas_of_Interest_Education", 'TRUE']]);
+    // console.log(JSON.stringify(map.getFilter('locations')));
+    // THIS GETS THE FEATURES: map.querySourceFeatures('places',  { filter:["all",["==","Spring_Availability","TRUE"],["==","Areas_of_Interest_Education","TRUE"]]} );
+
+
 
   // clears the sidebar //
 //  document.getElementById('listings').innerHTML = '';
@@ -131,8 +144,8 @@ map.on('click', function(e) {
 
   //get the additionalInfo for the tooltip div
   var additionalInfo = "";
-  if(feature.properties['Local Volunteering (spring semester)'] !=""){
-    additionalInfo = "<h4>Additional Info</h4>"+"<p>"+feature.properties['Local Volunteering (spring semester)']+"</p>"
+  if(feature.properties['Local Volunteering (spring semester)'] !="" ||  feature.properties['Local Volunteering (spring semester)']!= ""){
+    additionalInfo = "<h4>Additional Info</h4>"+"<p>"+feature.properties['Local Volunteering (spring semester)']+"</p>"+"<p>"+feature.properties['Language_Other_Languages']+"</p>"
   }
   // this adds the div to the map!
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
@@ -192,10 +205,11 @@ function buildLocationList(data,val) {
     // Create a new div with the class 'details' for each location
     // and fill it with the email adress
     var details = listing.appendChild(document.createElement('div'));
+    details.className += 'descrip';
     // we want <a href="prop.Organization_Information_Website"> Organization_Information_Name_of_Organization </a>
     //details.innerHTML = "<a href='"+prop.Organization_Information_Website +"'>"+ prop.Organization_Information_Name_of_Organization+"</a>";
     details.innerHTML = "<a href='"+prop.Organization_Information_Website +"'>(Website) </a>";
-    if (prop.Organization_Information_Location_of_Organization_City) {
+    if (prop.Organization_Information_Location_of_Organization_City != '') {
       details.innerHTML += '<a> &middot; ' + prop.Organization_Information_Location_of_Organization_City + ' &middot; ' + prop.Organization_Information_Location_of_Organization_State + '</a>';
     }
   } //end for loop
