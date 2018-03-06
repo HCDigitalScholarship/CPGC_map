@@ -5,7 +5,6 @@ import sys, getopt
 import csv
 import json
 import spreadsheet
-import
 
 
 
@@ -94,6 +93,7 @@ def read_sheet(json_file, format):
         else:
             #''.join(fieldnames[i].split()) is to ensure that no key has any spaces in it.
             sheet_rows.extend([{"type": "Feature", "geometry": { "type": "Point", "coordinates": [ lon,lat ] },"properties":{''.join(fieldnames[i].split()):row[fieldnames[i]] for i in range(len(fieldnames))}}])
+
 #    print "first Feature obj",sheet_rows[0]
 #    print json.dumps(sheet_rows)
 #    write_json(sheet_rows, json_file, format)
@@ -105,7 +105,7 @@ def read_sheet(json_file, format):
         f.write("}]';")
 
 
-#Convert data into json and write it
+#Convert data into json and write it  -- for some unknown reason this must be used as a function for googlesheet
 def write_json(data, json_file, format):
 #    print "in write_json"
 #    print data
