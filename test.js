@@ -271,6 +271,29 @@ function closeNav() {
     document.getElementById('filter-container').style.marginLeft = "130px";
 }
 
+
+  /////////////////////////////////////////////////////////
+ ////////////  populates the "Add Tags" list  ////////////
+/////////////////////////////////////////////////////////
+
+// what this function will do it grab a list of all of the current active tabs.
+// then from that list is will find the ones not listed as from:
+//  Object.keys(places.features[0].properties)Object.keys(places.features[0].properties)
+//      since that gets all of the Properties
+// remove all of the properties that
+// remove all "Areas_of_Interest", "Organization_Information"
+
+
+// consider using the below code to reduce the dictionary to just keys that have TRUE/FALSE values
+// This would be called outside of the function so it would only have to be created once !
+//var filtered = Object.keys(dict).reduce(function (filtered, key) {
+//    if (dict[key] > 1) filtered[key] = dict[key];
+//    return filtered;
+//}, {});
+
+
+
+
   /////////////////////////////////////////////////////////
  ///// removes some elements and  opens the sidebar //////
 /////////////////////////////////////////////////////////

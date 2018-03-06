@@ -17,6 +17,8 @@
 <!--    <script type="text/javascript" src="data.json"></script>-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"/>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js'></script>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
 <!--
 <script type="text/javascript" src="CESR_newer.json"></script>
@@ -42,6 +44,21 @@
  <body>
 <div id='filter-container'>
    <nav class='menu-ui'>
+     <div >
+       <div class="btn-group dropup" style ="float:right;">
+         <button type="button" class="btn btn-default">Add tags</button>
+         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <span class="caret"></span>
+           <span class="sr-only">Toggle Dropdown</span>
+         </button>
+         <ul class="dropdown-menu">
+           <!-- Dropdown menu links -->
+         </ul>
+       </div>
+     <div>
+
+
+
      <a href='#' id='default' class='active' data-filter='all'>Show all</a>
      <a href='#' data-filter='Spring_Availability'>Local Volunteering (Spring Semester)</a>
      <a href='#' data-filter='Language_Arabic'>Arabic</a>
@@ -58,6 +75,8 @@
      <a href='#' data-filter='Areas_of_Interest_Human_Rights_Civil_Rights'>Human Rights Civil Rights</a>
      <a href='#' data-filter='Areas_of_Interest_Healthcare'>Healthcare</a>
      <a href='#' data-filter='Areas_of_Interest_Environment'>Environment</a>
+
+
    </nav>
  </div>
 
