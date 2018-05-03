@@ -241,3 +241,7 @@ font:bolder;
 background:#CE464D;
 color:#202020;
 }
+
+ ul.dropdown-menu {
+  margin-left: -50px; /* very hacky but does the trick */
+}
