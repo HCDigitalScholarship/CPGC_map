@@ -82,7 +82,7 @@ def read_sheet(json_file, format):
     #print(input_data) # this variable is stored properly
     sheet_rows = []
 
-    fieldnames = input_data[0].keys() # should remove lat and long from this because they have no use as properties
+    fieldnames = list(input_data[0].keys()) # should remove lat and long from this because they have no use as properties
 #    print("fieldnames= ", fieldnames)  # this variable is stored properly
     for row in input_data:
         #print row
