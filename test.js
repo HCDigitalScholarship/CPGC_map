@@ -276,12 +276,14 @@ function closeNav() {
  ////////////  populates the "Add Tags" list  ////////////
 /////////////////////////////////////////////////////////
 
+function popTagList(){
 // what this function will do it grab a list of all of the current active tabs.
 // then from that list is will find the ones not listed as from:
-//  Object.keys(places.features[0].properties)Object.keys(places.features[0].properties)
+//  Object.keys(places.features[0].properties)
 //      since that gets all of the Properties
 // remove all of the properties that
 // remove all "Areas_of_Interest", "Organization_Information"
+
 
 
 // consider using the below code to reduce the dictionary to just keys that have TRUE/FALSE values
@@ -291,8 +293,21 @@ function closeNav() {
 //    return filtered;
 //}, {});
 
+var mydict = places.features[0].properties; // just grabs one ... they all have the same keys so it doesnt really matter
+var filteredTrue =  Object.keys(mydict).reduce(function (filtered, key ) {
+    if (mydict[key] =="TRUE") filtered[key]= mydict[key];
+    return filtered;
+}, {});
+var filteredFalse =  Object.keys(mydict).reduce(function (filtered, key ) {
+    if (mydict[key] =="FALSE") filtered[key]= mydict[key];
+    return filtered;
+}, {});
+
+var possibleTags = Object.keys(filteredTrue) + Object.keys(filteredFalse);
 
 
+
+}
 
   /////////////////////////////////////////////////////////
  ///// removes some elements and  opens the sidebar //////

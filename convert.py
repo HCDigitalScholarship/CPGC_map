@@ -1,11 +1,17 @@
 #!/usr/bin/python
-
+# coding=utf-8
 
 import sys, getopt
 import csv
 import json
 import spreadsheet
 
+
+###
+#
+# need to edit to take out apostrophes
+#
+###
 
 
 #Get Command Line Arguments
@@ -97,25 +103,26 @@ def read_sheet(json_file, format):
 #    print "first Feature obj",sheet_rows[0]
 #    print json.dumps(sheet_rows)
 #    write_json(sheet_rows, json_file, format)
-#    print("got here")
+    print(json.dumps(sheet_rows).replace("""'""","\'"))
+
 
     with open(json_file, "w") as f:
         f.write("data ='[{\"type\": \"FeatureCollection\",\"features\":")
-        f.write(json.dumps(sheet_rows))
+        f.write(json.dumps(sheet_rows,encoding="utf-8",ensure_ascii=True).replace("""'""","""\'"""))
         f.write("}]';")
 
 
 #Convert data into json and write it  -- for some unknown reason this must be used as a function for googlesheet
 def write_json(data, json_file, format):
 #    print "in write_json"
-#    print data
+    print data
     with open(json_file, "w") as f:
         f.write("data ='[{\"type\": \"FeatureCollection\",\"features\":")
         if format == "pretty":
-            f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '),encoding="utf-8",ensure_ascii=False))
+            f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '),encoding="utf-8",ensure_ascii=True).replace("""'""","""\'"""))
         else:
            # f.write(data)
-            f.write(json.dumps(data))
+            f.write(json.dumps(data,encoding="utf-8",ensure_ascii=True).replace("""'""","""\'"""))
         f.write("}]';")
 
 if __name__ == "__main__":
