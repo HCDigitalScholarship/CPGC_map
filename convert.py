@@ -103,12 +103,12 @@ def read_sheet(json_file, format):
 #    print "first Feature obj",sheet_rows[0]
 #    print json.dumps(sheet_rows)
 #    write_json(sheet_rows, json_file, format)
-    print(json.dumps(sheet_rows).replace("""'""","\'"))
+    #print(json.dumps(sheet_rows).replace("""'""","\'"))
 
 
     with open(json_file, "w") as f:
         f.write("data ='[{\"type\": \"FeatureCollection\",\"features\":")
-        f.write(json.dumps(sheet_rows,encoding="utf-8",ensure_ascii=True).replace("""'""","""\'"""))
+        f.write(json.dumps(sheet_rows,encoding="utf-8",ensure_ascii=True).replace("'",'\u2019'))
         f.write("}]';")
 
 
@@ -119,10 +119,10 @@ def write_json(data, json_file, format):
     with open(json_file, "w") as f:
         f.write("data ='[{\"type\": \"FeatureCollection\",\"features\":")
         if format == "pretty":
-            f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '),encoding="utf-8",ensure_ascii=True).replace("""'""","""\'"""))
+            f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '),encoding="utf-8",ensure_ascii=True).replace("'",'\u2019'))
         else:
            # f.write(data)
-            f.write(json.dumps(data,encoding="utf-8",ensure_ascii=True).replace("""'""","""\'"""))
+            f.write(json.dumps(data,encoding="utf-8",ensure_ascii=True).replace("'",'\u2019'))
         f.write("}]';")
 
 if __name__ == "__main__":

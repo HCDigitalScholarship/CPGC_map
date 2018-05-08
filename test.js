@@ -154,6 +154,18 @@ function buildLocationList(data,val) {
   document.getElementById('listings').innerHTML = '';
   document.getElementById('resultnumber').innerHTML = '';
 
+  console.log(data);
+  // sorts the locations in alphabetical order //
+  // Organization_Information_Name_of_Organization
+  data = data.sort(function(a,b){
+    if(a.properties.Organization_Information_Name_of_Organization == b.properties.Organization_Information_Name_of_Organization)
+        return 0;
+    if(a.properties.Organization_Information_Name_of_Organization < b.properties.Organization_Information_Name_of_Organization)
+        return -1;
+    if(a.properties.Organization_Information_Name_of_Organization > b.properties.Organization_Information_Name_of_Organization)
+        return 1;
+      });
+
   // Iterate through the list of places //
   var res = data.length
   var numres = document.getElementById('resultnumber');
