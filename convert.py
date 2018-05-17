@@ -9,7 +9,6 @@ import spreadsheet
 
 ###
 #
-# need to edit to take out apostrophes
 #
 ###
 
